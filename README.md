@@ -1,4 +1,4 @@
-# Map Auth App
+# comHodos 
 
 Une application mobile React Native avec authentification et carte interactive, permettant aux utilisateurs de se connecter, répondre à un questionnaire personnalisé et accéder à une carte interactive avec un style minimaliste inspiré de Qwant Maps.
 
@@ -124,7 +124,7 @@ Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 
 ## 👥 Auteurs
 
-- Benjamin Salocin - [@bdsalocin](https://github.com/bdsalocin)
+[@bdsalocin](https://github.com/bdsalocin)
 
 ## 🙏 Remerciements
 
