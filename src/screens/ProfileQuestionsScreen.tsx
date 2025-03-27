@@ -42,6 +42,8 @@ const ProfileQuestionsScreen = () => {
   // Animation pour la transition entre les questions
   const slideAnim = useRef(new Animated.Value(0)).current;
   const fadeAnim = useRef(new Animated.Value(1)).current;
+  const scaleAnim = useRef(new Animated.Value(1)).current;
+  const navAnim = useRef(new Animated.Value(0)).current;
 
   // Effet pour le débogage
   useEffect(() => {
@@ -114,51 +116,66 @@ const ProfileQuestionsScreen = () => {
   // Fonction pour sélectionner le genre
   const selectGender = (selected: Gender) => {
     setGender(selected);
-    // Animation légère avant de passer à la question suivante
-    Animated.spring(fadeAnim, {
-      toValue: 0.6,
+    // Transition rapide
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 200,
       useNativeDriver: true,
-      friction: 3,
     }).start(() => {
-      setTimeout(() => {
-        goToNextStep();
-      }, 300);
+      setStep(prev => prev + 1);
+      fadeAnim.setValue(0);
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 50,
+        useNativeDriver: true,
+      }).start();
     });
   };
 
   // Fonction pour sélectionner le statut relationnel
   const selectRelationshipStatus = (selected: RelationshipStatus) => {
     setRelationshipStatus(selected);
-    // Animation légère avant de passer à la question suivante
-    Animated.spring(fadeAnim, {
-      toValue: 0.6,
+    // Transition rapide
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 200,
       useNativeDriver: true,
-      friction: 3,
     }).start(() => {
-      setTimeout(() => {
-        goToNextStep();
-      }, 300);
+      setStep(prev => prev + 1);
+      fadeAnim.setValue(0);
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 50,
+        useNativeDriver: true,
+      }).start();
     });
   };
 
   // Fonction pour sélectionner le statut parental
   const selectParentalStatus = (selected: ParentalStatus) => {
     setParentalStatus(selected);
-    // Animation légère avant de passer à l'écran de partage de localisation
-    Animated.spring(fadeAnim, {
-      toValue: 0.6,
+    // Transition rapide
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 200,
       useNativeDriver: true,
-      friction: 3,
     }).start(() => {
-      setTimeout(() => {
-        goToNextStep();
-      }, 300);
+      setStep(prev => prev + 1);
+      fadeAnim.setValue(0);
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 50,
+        useNativeDriver: true,
+      }).start();
     });
   };
 
   // Fonction pour naviguer vers l'écran de carte avec les informations collectées
   const finishQuestionnaire = () => {
     setHasCompletedQuestionnaire(true);
+    setTimeout(() => {
+      navigation.replace('MapScreen');
+    }, 100);
   };
 
   // Fonction pour afficher la question actuelle
@@ -387,6 +404,25 @@ const ProfileQuestionsScreen = () => {
       default:
         return null;
     }
+  };
+
+  const handleAnswer = (answer: string) => {
+    // Transition rapide
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 50,
+      useNativeDriver: true,
+    }).start(() => {
+      setStep(prev => prev + 1);
+      
+      // Réinitialiser et afficher la nouvelle question
+      fadeAnim.setValue(0);
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 50,
+        useNativeDriver: true,
+      }).start();
+    });
   };
 
   return (
